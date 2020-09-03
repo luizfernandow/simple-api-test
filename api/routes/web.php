@@ -11,6 +11,17 @@
 |
 */
 
+use Illuminate\Support\Facades\Artisan;
+
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+$router->post('/reset', function () use ($router) {
+    Artisan::call('migrate:refresh');
+    return 'OK';
+});
+
+$router->get('/balance', 'AccountController@balance');
+
+$router->post('/event', 'AccountController@event');
