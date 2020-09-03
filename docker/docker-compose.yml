@@ -1,0 +1,15 @@
+version: '3'
+services:
+    php:
+        build: ./php
+        image: simple_api_test/php
+        container_name: php-simple_api_test
+        volumes:
+            - "../api:/var/www/html"
+        ports:
+            - "8000:8000"
+        command: /bin/sh -c "composer install && php -S 0.0.0.0:8000 -t public"
+        networks:
+            - simple_api_test
+networks:
+    simple_api_test:
